@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Raj Singh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            overflow: hidden;
+        }
+        
+        .logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .logo-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid #3b82f6;
+            width: 100%;
+            height: 100%;
+            transform: scale(0);
+            animation: pulse 2s ease-in-out forwards;
+        }
+        
+        .logo-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: appear 1s ease-out 0.5s forwards;
+        }
+        
+        .name-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out 1.5s forwards;
+        }
+        
+        .tagline {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out 2s forwards;
+        }
+        
+        .enter-button {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out 2.5s forwards;
+            transition: all 0.3s ease;
+        }
+        
+        .enter-button:hover {
+            transform: translateY(0) scale(1.05);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+        }
+        
+        .tech-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #3b82f6;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 15s linear infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes appear {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-50px) translateX(100px); }
+            75% { transform: translateY(100px) translateX(25px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        .circuit-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+            opacity: 0.3;
+            animation: circuit 8s linear infinite;
+        }
+        
+        @keyframes circuit {
+            0% { width: 0; opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { width: 100%; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-container" class="fixed inset-0 z-0"></div>
+    
+    <div class="circuit-line" style="top: 20%; left: 0;"></div>
+    <div class="circuit-line" style="top: 40%; right: 0;"></div>
+    <div class="circuit-line" style="top: 60%; left: 0;"></div>
+    <div class="circuit-line" style="top: 80%; right: 0;"></div>
+    
+    <div class="flex flex-col items-center justify-center min-h-screen relative z-10 px-4">
+        <div class="logo-container mb-8">
+            <div class="logo-circle"></div>
+            <div class="logo-inner">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 5L37.5 15H22.5L30 5Z" fill="#3b82f6"/>
+                    <path d="M15 20H45V40H15V20Z" fill="#3b82f6" fill-opacity="0.7"/>
+                    <path d="M22.5 45L30 55L37.5 45H22.5Z" fill="#3b82f6"/>
+                    <circle cx="30" cy="30" r="8" fill="#0f172a"/>
+                    <circle cx="30" cy="30" r="4" fill="#3b82f6"/>
+                    <path d="M5 30H15" stroke="#3b82f6" stroke-width="2"/>
+                    <path d="M45 30H55" stroke="#3b82f6" stroke-width="2"/>
+                    <path d="M30 5V15" stroke="#3b82f6" stroke-width="2"/>
+                    <path d="M30 45V55" stroke="#3b82f6" stroke-width="2"/>
+                </svg>
+            </div>
+        </div>
+        
+        <h1 class="name-text text-4xl md:text-6xl font-bold text-white mb-4 text-center">Aditya Raj Singh</h1>
+        <p class="tagline text-lg md:text-xl text-blue-300 mb-10 text-center">Innovating through technology</p>
+        
+        <button class="enter-button bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-8 rounded-full flex items-center">
+            Enter Site
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create tech particles
+            const particlesContainer = document.getElementById('particles-container');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('tech-particle');
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                // Random size
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random animation delay
+                const delay = Math.random() * 10;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Add click event to the enter button
+            const enterButton = document.querySelector('.enter-button');
+            enterButton.addEventListener('click', () => {
+                // This would typically navigate to your main site
+                
+                window.location.href = 'mypage.html';
+                // In a real implementation, you would use:
+                // window.location.href = 'main.html';
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'962d3bf5421d3b79',t:'MTc1MzEyNzQ5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
