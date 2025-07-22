@@ -430,9 +430,138 @@
             opacity: 0.05;
             pointer-events: none;
         }
+        /* --- Custom Cursor Styles --- */
+    body {
+    cursor: none; /* Hide default cursor */
+    }
+    .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #339af0;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    }
+    .cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #339af0;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, transform 0.3s;
+    }
+    .cursor-dot.active {
+    transform: translate(-50%, -50%) scale(1.5);
+    }
+    .cursor-outline.active {
+    width: 50px;
+    height: 50px;
+    border-color: #228be6;
+    }
+    .cursor-trail {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background-color: rgba(51, 154, 240, 0.3);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9997;
+    transform: translate(-50%, -50%);
+}
     </style>
 </head>
 <body>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+    const clickableElements = document.querySelectorAll('button, a, .btn-hover, .animated-border');
+    const trailCount = 10;
+    const trails = [];
+    
+    // Create trail elements
+    for (let i = 0; i < trailCount; i++) {
+        const trail = document.createElement('div');
+        trail.classList.add('cursor-trail');
+        trail.style.opacity = 1 - (i / trailCount);
+        document.body.appendChild(trail);
+        trails.push({
+            element: trail,
+            x: 0,
+            y: 0,
+            delay: i * 2
+        });
+    }
+
+    // Update cursor position
+    const updateCursorPosition = (e) => {
+        cursorDot.style.left = `${e.clientX}px`;
+        cursorDot.style.top = `${e.clientY}px`;
+        setTimeout(() => {
+            cursorOutline.style.left = `${e.clientX}px`;
+            cursorOutline.style.top = `${e.clientY}px`;
+        }, 50);
+        setTimeout(() => {
+            for (let i = 0; i < trails.length; i++) {
+                setTimeout(() => {
+                    trails[i].x = e.clientX;
+                    trails[i].y = e.clientY;
+                    trails[i].element.style.left = `${e.clientX}px`;
+                    trails[i].element.style.top = `${e.clientY}px`;
+                }, trails[i].delay);
+            }
+        }, 20);
+    };
+
+    // Add active class on clickable elements
+    clickableElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('active');
+            cursorOutline.classList.add('active');
+        });
+        element.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('active');
+            cursorOutline.classList.remove('active');
+        });
+    });
+
+    // Add click animation
+    document.addEventListener('mousedown', () => {
+        cursorDot.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        cursorOutline.style.transform = 'translate(-50%, -50%) scale(0.8)';
+    });
+    document.addEventListener('mouseup', () => {
+        cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+
+    // Handle cursor visibility
+    document.addEventListener('mousemove', updateCursorPosition);
+    document.addEventListener('mouseenter', () => {
+        cursorDot.style.opacity = '1';
+        cursorOutline.style.opacity = '1';
+        trails.forEach(trail => {
+            trail.element.style.opacity = 1 - (trails.indexOf(trail) / trailCount);
+        });
+    });
+    document.addEventListener('mouseleave', () => {
+        cursorDot.style.opacity = '0';
+        cursorOutline.style.opacity = '0';
+        trails.forEach(trail => {
+            trail.element.style.opacity = '0';
+        });
+    });
+});
+</script>
+    <!-- Add after <body> -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
     <!-- Background Shapes -->
     <div class="bg-shapes" id="bg-shapes"></div>
     
@@ -628,7 +757,7 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
-                                <span class="font-medium">DevOps</span>
+                                <span class="font-medium">OOPS</span>
                                 <span>70%</span>
                             </div>
                             <div class="progress-bar">
